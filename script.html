@@ -1,0 +1,24 @@
+<script defer>
+  function resolveVariable(value) {
+    const regex = /\|contact\.first_name\|/g;
+    const allElements = document.querySelectorAll(".text-element");
+
+    allElements.forEach((element) => {
+      element.textContent = element.textContent.replace(regex, value);
+    });
+  }
+
+  const firstNameInputEl = document.querySelector("#first_name");
+  const firstNameAncestor = firstNameInputEl.closest(".ghl-question");
+
+  firstNameInputEl?.addEventListener("input", function (evt) {
+    if (firstNameAncestor.classList.contains("ghl-page-current")) {
+      console.log("+_+");
+      document
+        .querySelector(`.ghl-button[aria-label="next button"]`)
+        ?.addEventListener("click", function (evt) {
+          resolveVariable(firstNameInputEl.value);
+        });
+    }
+  });
+</script>
